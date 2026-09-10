@@ -1,0 +1,16 @@
+# Python
+__pycache__/
+*.pyc
+.venv/
+venv/
+
+# Vercel
+.vercel/
+
+# Variables de entorno locales
+.env
+.env.local
+
+# Sistema
+.DS_Store
+Thumbs.db

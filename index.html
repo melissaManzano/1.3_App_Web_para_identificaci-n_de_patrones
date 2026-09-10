@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Identificación de Patrones con IA</title>
+  <link rel="stylesheet" href="assets/css/style.css" />
+</head>
+<body>
+
+  <header class="app-header">
+    <h1>🔎 Identificación de Patrones con IA</h1>
+    <p>Sube una imagen y la IA identificará, contará y marcará los elementos.</p>
+  </header>
+
+  <main class="app-main">
+
+    <section class="panel upload-panel">
+      <label for="fileInput" class="file-drop" id="fileDrop">
+        <span id="fileDropText">Arrastra una imagen aquí o haz clic para seleccionarla</span>
+        <input type="file" id="fileInput" accept="image/*" hidden />
+      </label>
+
+      <div class="controls-row">
+        <input
+          type="text"
+          id="targetInput"
+          placeholder='Elemento a contar (opcional). Ej: "manzanas", "autos", "personas"'
+        />
+        <button id="analyzeBtn" disabled>Analizar imagen</button>
+      </div>
+
+      <p id="statusMsg" class="status-msg"></p>
+    </section>
+
+    <section class="panel result-panel">
+      <div class="canvas-wrapper">
+        <canvas id="resultCanvas"></canvas>
+      </div>
+
+      <div class="result-summary" id="resultSummary" hidden>
+        <h2>Elementos encontrados: <span id="countValue">0</span></h2>
+        <ul id="elementsList"></ul>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="app-footer">
+    <p>Proyecto académico · OpenAI Vision API + Vercel Functions</p>
+  </footer>
+
+  <script src="assets/js/app.js"></script>
+</body>
+</html>
