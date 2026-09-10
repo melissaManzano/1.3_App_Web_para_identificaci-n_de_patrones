@@ -6,9 +6,9 @@ from openai import OpenAI
 # Lee la variable de entorno y limpia espacios o barras finales
 ALLOWED_ORIGIN = os.environ.get("ALLOWED_ORIGIN", "").strip().rstrip("/")
 
-# Modelo con capacidad de visión. gpt-4o-mini es más barato,
-# gpt-4o suele ubicar mejor los elementos dentro de la imagen.
-MODEL_NAME = os.environ.get("VISION_MODEL", "gpt-4o-mini")
+# Modelo con capacidad de visión. gpt-5-chat-latest es rápido y preciso;
+# gpt-5.2 ubica mejor los elementos pero es más lento (modelo de razonamiento).
+MODEL_NAME = os.environ.get("VISION_MODEL", "gpt-5-chat-latest")
 
 # Límite de tamaño del body (bytes). Vercel Hobby permite ~4.5MB por payload,
 # por eso el frontend redimensiona/compacta la imagen antes de enviarla.
@@ -117,7 +117,8 @@ class handler(BaseHTTPRequestHandler):
                         ],
                     },
                 ],
-                max_tokens=1500,
+                # Los modelos GPT-5 usan max_completion_tokens en lugar de max_tokens.
+                max_completion_tokens=1500,
             )
 
             raw_content = response.choices[0].message.content
