@@ -1,7 +1,9 @@
 // ---------------------------------------------------------------------------
 // Configuración
 // ---------------------------------------------------------------------------
-const API_ENDPOINT = "/api/analyze";
+// El frontend vive en GitHub Pages (sitio estático) y la función de IA
+// corre en Vercel, por eso hace falta la URL absoluta en vez de una ruta relativa.
+const API_ENDPOINT = "https://1-3-app-web-para-identificaci-n-de-livid.vercel.app/api/analyze";
 const MAX_DIMENSION = 1024;   // redimensionamos para no exceder el límite de payload
 const JPEG_QUALITY = 0.85;
 
