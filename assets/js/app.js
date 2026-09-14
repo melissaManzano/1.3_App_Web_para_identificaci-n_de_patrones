@@ -22,7 +22,7 @@ const resultSummary = document.getElementById("resultSummary");
 const countValue = document.getElementById("countValue");
 const elementsList = document.getElementById("elementsList");
 
-let currentImage = null;   // HTMLImageElement ya redimensionada
+let currentImage = null;   // <canvas> con la imagen ya redimensionada, lista para dibujar
 let currentDataUrl = null; // data URL en JPEG, lista para enviar a la API
 
 // ---------------------------------------------------------------------------
@@ -67,8 +67,8 @@ function handleFile(file) {
       currentImage = resized.image;
       currentDataUrl = resized.dataUrl;
 
-      canvas.width = resized.image.width;
-      canvas.height = resized.image.height;
+      canvas.width = resized.width;
+      canvas.height = resized.height;
       ctx.drawImage(resized.image, 0, 0);
 
       fileDropText.textContent = `Imagen cargada: ${file.name}`;
@@ -100,10 +100,10 @@ function resizeImage(img) {
 
   const dataUrl = tempCanvas.toDataURL("image/jpeg", JPEG_QUALITY);
 
-  const resizedImg = new Image();
-  resizedImg.src = dataUrl;
-
-  return { image: resizedImg, dataUrl, width, height };
+  // Usamos el propio canvas temporal como "imagen" base para redibujar:
+  // ya está completamente pintado y evita depender de la carga asíncrona
+  // de un <img> nuevo (que dejaba width/height en 0 al leerlas de inmediato).
+  return { image: tempCanvas, dataUrl, width, height };
 }
 
 // ---------------------------------------------------------------------------
