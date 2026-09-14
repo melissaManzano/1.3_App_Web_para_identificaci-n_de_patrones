@@ -6,9 +6,10 @@ from openai import OpenAI
 # Lee la variable de entorno y limpia espacios o barras finales
 ALLOWED_ORIGIN = os.environ.get("ALLOWED_ORIGIN", "").strip().rstrip("/")
 
-# Modelo con capacidad de visión. gpt-5-chat-latest es rápido y preciso;
-# gpt-5.2 ubica mejor los elementos pero es más lento (modelo de razonamiento).
-MODEL_NAME = os.environ.get("VISION_MODEL", "gpt-5-chat-latest")
+# Modelo con capacidad de visión. gpt-5.6-luna es rápido y barato, ideal para
+# una función serverless con límite de tiempo. gpt-5.6-terra/-sol ubican mejor
+# los elementos pero son más lentos y caros (más razonamiento).
+MODEL_NAME = os.environ.get("VISION_MODEL", "gpt-5.6-luna")
 
 # Límite de tamaño del body (bytes). Vercel Hobby permite ~4.5MB por payload,
 # por eso el frontend redimensiona/compacta la imagen antes de enviarla.
